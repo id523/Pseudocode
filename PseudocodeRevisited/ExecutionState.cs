@@ -17,10 +17,10 @@ namespace PseudocodeRevisited
         /// Creates a new ExecutionState.
         /// </summary>
         public ExecutionState() : this(null) { }
-        public ExecutionState(Scope parentScope)
+        public ExecutionState(ExecutionState parent)
         {
-            Vars = new Scope(parentScope);
-            InitBuiltInFunctions();
+            Vars = new Scope(parent.Vars);
+            LoadedLibraries = parent?.LoadedLibraries ?? new Dictionary<string, Library>();
         }
         /// <summary>
         /// Gets or sets the next statement of the program to run.

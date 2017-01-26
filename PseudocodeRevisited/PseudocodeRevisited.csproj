@@ -80,6 +80,7 @@
     <Compile Include="FromToInternals\StartLoop.cs" />
     <Compile Include="FromToInternals\UpperBoundConditional.cs" />
     <Compile Include="FromToInternals\StepLoop.cs" />
+    <Compile Include="ExternalLibraries.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Pseudocollection.cs" />
     <Compile Include="CustomExceptions.cs" />

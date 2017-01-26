@@ -40,14 +40,14 @@ namespace PseudocodeRevisited.Statements
         /// </summary>
         protected override void Run(ExecutionState s)
         {
-            Scope VarsCapture = s.Vars;
+            ExecutionState Capture = s;
             s.AddFunction(FunctionName, delegate (ExecutionState s2, object[] args)
             {
                 if (args.Length < argnames.Length)
                     throw new RuntimeException(
                         string.Format("Function {0}() expects at least {1} arguments",
                         FunctionName, argnames.Length));
-                ExecutionState funcstate = new ExecutionState(VarsCapture);
+                ExecutionState funcstate = new ExecutionState(Capture);
                 funcstate.Vars.SetVariable("__args", args);
                 for (int i = 0; i < argnames.Length; i++)
                 {

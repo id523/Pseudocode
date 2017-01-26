@@ -13,14 +13,13 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Adds built-in functions.
         /// </summary>
-        private void InitBuiltInFunctions()
+        private void InitCoreBuiltIns()
         {
             #region Data Structure Creation
             AddFunction("array", BIF.MakeArray);
             AddFunction("stack", BIF.MakeObject<Stack<object>>);
             AddFunction("queue", BIF.MakeObject<Queue<object>>);
             AddFunction("collection", BIF.MakeObject<Pseudocollection>);
-            AddFunction("hashtable", BIF.MakeObject<Hashtable>);
             #endregion
             #region Data Structure Operations
             AddFunction(".isEmpty", BIF.IsEmpty);
@@ -34,49 +33,56 @@ namespace PseudocodeRevisited
             AddFunction(".getNext", BIF.GetNext);
             AddFunction(".resetNext", BIF.ResetNext);
             AddFunction(".hasNext", BIF.HasNext);
-            AddFunction(".hasKey", BIF.HasKey);
-            AddFunction(".getKey", BIF.GetKey);
-            AddFunction(".setKey", BIF.SetKey);
             #endregion
             #region Input/Output
-            AddFunction("input", BIF.Input);
-            AddFunction("write", BIF.WriteLine);
             AddFunction("writeLine", BIF.WriteLine);
-            AddFunction("error", BIF.Error);
             #endregion
+            AddFunction(".__index", BIF.Index);
+        }
+
+        private Library CreateBuiltInsLibrary()
+        {
+            Library lib = new Library();
+            lib.Add("hashtables.hashtable", "hashtable", BIF.MakeObject<Hashtable>);
+            lib.Add("hashtables.hasKey", ".hasKey", BIF.HasKey);
+            lib.Add("hashtables.getKey", ".getKey", BIF.GetKey);
+            lib.Add("hashtables.setKey", ".setKey", BIF.SetKey);
+            lib.Add("inputOutput.input", "input", BIF.Input);
+            lib.Add("inputOutput.write", "write", BIF.Write);
+            lib.Add("inputOutput.error", "error", BIF.Error);
             #region Math Functions
-            AddFunction("abs", BIF.DblFunction("abs", Math.Abs));
-            AddFunction("acos", BIF.DblFunction("acos", Math.Acos));
-            AddFunction("asin", BIF.DblFunction("asin", Math.Asin));
-            AddFunction("atan", BIF.Atan); // Math.Atan() and Math.Atan2()
-            AddFunction("atan2", BIF.DblFunction("atan2", Math.Atan2));
-            AddFunction("ceil", BIF.DblFunction("ceil", Math.Ceiling));
-            AddFunction("cos", BIF.DblFunction("cos", Math.Cos));
-            AddFunction("cosh", BIF.DblFunction("cosh", Math.Cosh));
-            AddFunction("exp", BIF.DblFunction("exp", Math.Exp));
-            AddFunction("floor", BIF.DblFunction("floor", Math.Floor));
-            AddFunction("log", BIF.DblFunction("log", (Func<double, double>)Math.Log));
-            AddFunction("logB", BIF.DblFunction("logB", (Func<double, double, double>)Math.Log));
-            AddFunction("log10", BIF.DblFunction("log10", Math.Log10));
-            AddFunction("max", BIF.Max); // Math.Max()
-            AddFunction("min", BIF.Min); // Math.Min()
-            AddFunction("pow", BIF.DblFunction("pow", Math.Pow));
-            AddFunction("round", BIF.DblFunction("round", Math.Round));
-            AddFunction("sign", BIF.DblFunction("sign", Math.Sign));
-            AddFunction("sin", BIF.DblFunction("sin", Math.Sin));
-            AddFunction("sinh", BIF.DblFunction("sinh", Math.Sinh));
-            AddFunction("sqrt", BIF.DblFunction("sqrt", Math.Sqrt));
-            AddFunction("tan", BIF.DblFunction("tan", Math.Tan));
-            AddFunction("tanh", BIF.DblFunction("tanh", Math.Tanh));
-            AddFunction("truncate", BIF.DblFunction("truncate", Math.Truncate));
+            lib.Add("math.abs", "abs", BIF.DblFunction("abs", Math.Abs));
+            lib.Add("math.acos", "acos", BIF.DblFunction("acos", Math.Acos));
+            lib.Add("math.asin", "asin", BIF.DblFunction("asin", Math.Asin));
+            lib.Add("math.atan", "atan", BIF.Atan); // Math.Atan() and Math.Atan2()
+            lib.Add("math.atan2", "atan2", BIF.DblFunction("atan2", Math.Atan2));
+            lib.Add("math.ceil", "ceil", BIF.DblFunction("ceil", Math.Ceiling));
+            lib.Add("math.cos", "cos", BIF.DblFunction("cos", Math.Cos));
+            lib.Add("math.cosh", "cosh", BIF.DblFunction("cosh", Math.Cosh));
+            lib.Add("math.exp", "exp", BIF.DblFunction("exp", Math.Exp));
+            lib.Add("math.floor", "floor", BIF.DblFunction("floor", Math.Floor));
+            lib.Add("math.ln", "ln", BIF.DblFunction("ln", (Func<double, double>)Math.Log));
+            lib.Add("math.log", "log", BIF.DblFunction("log", (Func<double, double, double>)Math.Log));
+            lib.Add("math.log10", "log10", BIF.DblFunction("log10", Math.Log10));
+            lib.Add("math.max", "max", BIF.Max); // Math.Max()
+            lib.Add("math.min", "min", BIF.Min); // Math.Min()
+            lib.Add("math.pow", "pow", BIF.DblFunction("pow", Math.Pow));
+            lib.Add("math.round", "round", BIF.DblFunction("round", Math.Round));
+            lib.Add("math.sign", "sign", BIF.DblFunction("sign", Math.Sign));
+            lib.Add("math.sin", "sin", BIF.DblFunction("sin", Math.Sin));
+            lib.Add("math.sinh", "sinh", BIF.DblFunction("sinh", Math.Sinh));
+            lib.Add("math.sqrt", "sqrt", BIF.DblFunction("sqrt", Math.Sqrt));
+            lib.Add("math.tan", "tan", BIF.DblFunction("tan", Math.Tan));
+            lib.Add("math.tanh", "tanh", BIF.DblFunction("tanh", Math.Tanh));
+            lib.Add("math.truncate", "truncate", BIF.DblFunction("truncate", Math.Truncate));
             #endregion
             #region Functions on Functions
-            AddFunction(".invoke", BIF.InvokeFunction);
-            AddFunction(".invokeUnpack", BIF.InvokeUnpack);
-            AddFunction(".bind", BIF.Bind);
+            lib.Add("functionObjects.invoke", ".invoke", BIF.InvokeFunction);
+            lib.Add("functionObjects.invokeUnpack", ".invokeUnpack", BIF.InvokeUnpack);
+            lib.Add("functionObjects.bind", ".bind", BIF.Bind);
             #endregion
-            AddFunction("joinStrings", BIF.JoinStrings);
-            AddFunction(".__index", BIF.Index);
+            lib.Add("concat", "concat", BIF.Concat);
+            return lib;
         }
     }
     public static class BuiltInFunctions
@@ -446,7 +452,7 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Returns the concatenation of all of its arguments as a string.
         /// </summary>
-        public static object JoinStrings(ExecutionState s, object[] args)
+        public static object Concat(ExecutionState s, object[] args)
         {
             return string.Concat(args);
         }

@@ -10,8 +10,8 @@ namespace PseudocodeRevisited
         private struct NamedObject
         {
             public string Name { get; set; }
-            public object Value { get; set; }
-            public NamedObject(string n, object v)
+            public PseudocodeFunction Value { get; set; }
+            public NamedObject(string n, PseudocodeFunction v)
             {
                 Name = n;
                 Value = v;
@@ -20,20 +20,28 @@ namespace PseudocodeRevisited
             {
                 s.Vars.SetVariable(Name, Value);
             }
+            public override bool Equals(object obj)
+            {
+                return (obj is NamedObject) && Name.Equals(((NamedObject)obj).Name);
+            }
+            public override int GetHashCode()
+            {
+                return Name.GetHashCode();
+            }
         }
-        private Dictionary<string, List<NamedObject>> Groups =
-            new Dictionary<string, List<NamedObject>>();
+        private Dictionary<string, HashSet<NamedObject>> Groups =
+            new Dictionary<string, HashSet<NamedObject>>();
         private void AddSingle(string fullName, NamedObject v)
         {
-            List<NamedObject> group;
+            HashSet<NamedObject> group;
             if (!Groups.TryGetValue(fullName, out group))
             {
-                group = new List<NamedObject>();
+                group = new HashSet<NamedObject>();
                 Groups.Add(fullName, group);
             }
             group.Add(v);
         }
-        public void Add(string fullName, string valName, object val)
+        public void Add(string fullName, string valName, PseudocodeFunction val)
         {
             NamedObject obj = new NamedObject(valName, val);
             string[] idparts = fullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
