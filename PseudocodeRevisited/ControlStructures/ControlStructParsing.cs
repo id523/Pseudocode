@@ -51,7 +51,7 @@ namespace PseudocodeRevisited.ControlStructures
             result.AddTokenSpec(LineType.Continue, @"continue$");
             result.AddTokenSpec(LineType.Output, @"output\s*(?<content>.+)$");
             result.AddTokenSpec(LineType.Import,
-                @"from (?<library>[_A-Za-z][_A-Za-z0-9]*) import (?<id>[_A-Za-z.][_A-Za-z0-9.]*)$");
+                @"import (?<id>[_A-Za-z.][_A-Za-z0-9.]*) from (?<library>.+)$");
             result.AddTokenSpec(LineType.Expression, @".+$");
             return result;
         }

@@ -7,12 +7,6 @@ namespace PseudocodeRevisited
 {
     public sealed class Library
     {
-        public static void Test()
-        {
-            Library l = new Library();
-            l.Add("AB.CD.EF", "val", 25);
-            return;
-        }
         private struct NamedObject
         {
             public string Name { get; set; }
