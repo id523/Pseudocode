@@ -19,8 +19,9 @@ namespace PseudocodeRevisited
         public ExecutionState() : this(null) { }
         public ExecutionState(ExecutionState parent)
         {
-            Vars = new Scope(parent.Vars);
+            Vars = new Scope(parent?.Vars);
             LoadedLibraries = parent?.LoadedLibraries ?? new Dictionary<string, Library>();
+            InitCoreBuiltIns();
         }
         /// <summary>
         /// Gets or sets the next statement of the program to run.
