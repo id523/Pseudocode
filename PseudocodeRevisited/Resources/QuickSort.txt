@@ -1,0 +1,49 @@
+function partition(LIST, LO, HI)
+	PIVOT = LIST[(LO + HI) div 2]
+	I = LO - 1
+	J = HI + 1
+	loop while 1 = 1
+		I = I + 1
+		loop while LIST[I] < PIVOT
+			I = I + 1
+		end loop
+		J = J - 1
+		loop while LIST[J] > PIVOT
+			J = J - 1
+		end loop
+		if I >= J then
+			return J
+		end if
+		SWAPTEMP = LIST[I]
+		LIST[I] = LIST[J]
+		LIST[J] = SWAPTEMP
+	end loop
+end function
+
+function quicksort(LIST, LO, HI)
+	if LO < HI then
+		P = partition(LIST, LO, HI)
+		quicksort(LIST, LO, P)
+		quicksort(LIST, P + 1, HI)
+	end if
+end function
+
+function .sort(ARRAY)
+	quicksort(ARRAY, 0, ARRAY.length() - 1)
+end function
+
+ITEMCOUNT = 5
+TESTARRAY = array(ITEMCOUNT)
+loop INDEX from 0 to ITEMCOUNT - 1
+	output "[", INDEX, "]"
+	TESTARRAY[INDEX] = input() * 1
+end loop
+TESTARRAY.sort()
+RESULT = ""
+loop INDEX from 0 to ITEMCOUNT - 1
+	RESULT = RESULT + TESTARRAY[INDEX]
+	if INDEX < ITEMCOUNT - 1 then
+		RESULT = RESULT + " "
+	end if
+end loop
+output RESULT
