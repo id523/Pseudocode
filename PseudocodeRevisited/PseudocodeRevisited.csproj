@@ -80,9 +80,11 @@
     <Compile Include="FromToInternals\StartLoop.cs" />
     <Compile Include="FromToInternals\UpperBoundConditional.cs" />
     <Compile Include="FromToInternals\StepLoop.cs" />
+    <Compile Include="Library.cs" />
     <Compile Include="Pseudocollection.cs" />
     <Compile Include="CustomExceptions.cs" />
     <Compile Include="Statements\DefineFunction.cs" />
+    <Compile Include="Statements\Import.cs" />
     <Compile Include="Statements\Return.cs" />
     <Compile Include="Statements\BreakContinue.cs" />
     <Compile Include="Tokenizer.cs" />
@@ -135,6 +137,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -26,7 +26,7 @@ namespace PseudocodeRevisited.ControlStructures
             ReturnNothing, ReturnValue,
             End, Break, Continue,
             Expression,
-            Output,
+            Output, Import,
         }
         /// <summary>
         /// Creates a <see cref="DefaultTokenizer"/> to classify, and extract useful information from, lines of code.
@@ -50,6 +50,8 @@ namespace PseudocodeRevisited.ControlStructures
             result.AddTokenSpec(LineType.Break, @"break$");
             result.AddTokenSpec(LineType.Continue, @"continue$");
             result.AddTokenSpec(LineType.Output, @"output\s*(?<content>.+)$");
+            result.AddTokenSpec(LineType.Import,
+                @"from (?<library>[_A-Za-z][_A-Za-z0-9]*) import (?<id>[_A-Za-z.][_A-Za-z0-9.]*)$");
             result.AddTokenSpec(LineType.Expression, @".+$");
             return result;
         }
@@ -148,6 +150,8 @@ namespace PseudocodeRevisited.ControlStructures
                             string content = decision.Match.Groups["content"].Value;
                             builder.AddStatement(new Expression(LineNumber, "writeLine(" + content + ")", false));
                             break;
+                        case LineType.Import:
+                            throw new CompileException("Importing is currently not supported");
                         case LineType.Expression:
                             builder.AddStatement(new Expression(LineNumber, decision.Match.Value, true));
                             break;
