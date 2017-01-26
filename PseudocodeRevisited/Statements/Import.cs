@@ -10,18 +10,19 @@ namespace PseudocodeRevisited.Statements
     /// </summary>
     public class Import : Statement
     {
-        public Library Library { get; private set; }
+        public string LibraryName { get; private set; }
         public string ID { get; private set; }
-        public Import(int lineNumber, Library lib, string id) : base(lineNumber)
+        public Import(int lineNumber, string lib, string id) : base(lineNumber)
         {
-            Library = lib;
+            LibraryName = lib;
             ID = id;
         }
         protected override void Run(ExecutionState s)
         {
-            if (!Library.CanImport(ID))
+            Library lib = s.LoadLibrary(LibraryName);
+            if (!lib.CanImport(ID))
                 throw new RuntimeException("Unable to import " + ID);
-            Library.Import(ID, s);
+            lib.Import(ID, s);
         }
     }
 }

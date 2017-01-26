@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PseudocodeRevisited {
+namespace PseudocodeLauncher {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PseudocodeRevisited {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PseudocodeRevisited.ExamplePrograms", typeof(ExamplePrograms).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PseudocodeLauncher.ExamplePrograms", typeof(ExamplePrograms).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -86,9 +86,9 @@ namespace PseudocodeRevisited {
         ///end loop
         ///output NUM , &quot; has &quot; , FACTORS , &quot; fact [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Factors {
+        internal static string FindFactors {
             get {
-                return ResourceManager.GetString("Factors", resourceCulture);
+                return ResourceManager.GetString("FindFactors", resourceCulture);
             }
         }
         
@@ -128,7 +128,8 @@ namespace PseudocodeRevisited {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to prependText = join.
+        ///   Looks up a localized string similar to import math.atan from ExternalLibraryTest.dll
+        ///output 2 * atan2(1, 0).
         /// </summary>
         internal static string TestProgram {
             get {

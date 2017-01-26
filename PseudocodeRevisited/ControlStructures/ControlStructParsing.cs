@@ -151,7 +151,10 @@ namespace PseudocodeRevisited.ControlStructures
                             builder.AddStatement(new Expression(LineNumber, "writeLine(" + content + ")", false));
                             break;
                         case LineType.Import:
-                            throw new CompileException("Importing is currently not supported");
+                            builder.AddStatement(new Statements.Import(LineNumber,
+                                decision.Match.Groups["library"].Value,
+                                decision.Match.Groups["id"].Value));
+                            break;
                         case LineType.Expression:
                             builder.AddStatement(new Expression(LineNumber, decision.Match.Value, true));
                             break;

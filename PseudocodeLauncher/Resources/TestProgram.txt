@@ -1,0 +1,2 @@
+import math.atan from ExternalLibraryTest.dll
+output 2 * atan2(1, 0)
