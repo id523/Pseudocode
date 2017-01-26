@@ -11,7 +11,7 @@ namespace PseudocodeRevisited.Expressions
     /// <summary>
     /// Contains methods and types used to parse <see cref="Expression"/>s.
     /// </summary>
-    public static class ExpressionParsing
+    internal static class ExpressionParsing
     {
         /// <summary>
         /// A kind of token in an expression.

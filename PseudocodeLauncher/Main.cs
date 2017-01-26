@@ -18,8 +18,10 @@ namespace PseudocodeLauncher
             {
 #if DEBUG
                 program = ExamplePrograms.TestProgram;
+                if (program.Length == 0)
+                    program = ExamplePrograms.FindFactors;
 #else
-                program = ExamplePrograms.Factors;
+                program = ExamplePrograms.FindFactors;
 #endif
             }
             else
@@ -30,7 +32,7 @@ namespace PseudocodeLauncher
             // Compile and run the code
             try
             {
-                es.NextStatement = ControlStructParsing.MakeProgram(program);
+                es.NextStatement = ProgramBuilder.MakeProgram(program).FirstStatement;
                 es.Run();
             }
             catch (CompileException ex)

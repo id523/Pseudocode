@@ -1,2 +1,0 @@
-import externalTest from ExternalLibraryTest.dll
-sayHello()
