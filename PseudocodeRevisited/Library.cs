@@ -10,8 +10,8 @@ namespace PseudocodeRevisited
         private struct NamedObject
         {
             public string Name { get; set; }
-            public PseudocodeFunction Value { get; set; }
-            public NamedObject(string n, PseudocodeFunction v)
+            public object Value { get; set; }
+            public NamedObject(string n, object v)
             {
                 Name = n;
                 Value = v;
@@ -41,7 +41,11 @@ namespace PseudocodeRevisited
             }
             group.Add(v);
         }
-        public void Add(string fullName, string valName, PseudocodeFunction val)
+        public void AddFunction(string fullName, string valName, PseudocodeFunction val)
+        {
+            Add(fullName, valName, val);
+        }
+        public void Add(string fullName, string valName, object val)
         {
             NamedObject obj = new NamedObject(valName, val);
             string[] idparts = fullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);

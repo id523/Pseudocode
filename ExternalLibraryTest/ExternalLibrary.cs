@@ -11,7 +11,7 @@ namespace ExternalLibraryTest
     {
         public void Populate(Library lib)
         {
-            lib.Add("ExternalTest.SayHello", "sayHello", new PseudocodeFunction(SayHello));
+            lib.AddFunction("externalTest.sayHello", "sayHello", SayHello);
         }
         public static object SayHello(ExecutionState s, object[] args)
         {

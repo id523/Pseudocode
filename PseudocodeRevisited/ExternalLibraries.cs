@@ -24,7 +24,7 @@ namespace PseudocodeRevisited
             {
                 try
                 {
-                    Assembly loadedAssembly = Assembly.LoadFile(path);
+                    Assembly loadedAssembly = Assembly.LoadFile(System.IO.Path.GetFullPath(path));
                     result = new Library();
                     var candidates = loadedAssembly.GetExportedTypes()
                         .Where((t) => typeof(IExternalLibrary).IsAssignableFrom(t));
@@ -34,9 +34,9 @@ namespace PseudocodeRevisited
                         libMaker.Populate(result);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw new RuntimeException("Unable to load library " + path);
+                    throw new RuntimeException("Unable to load library " + path + ":\n" + ex.Message);
                 }
             }
             LoadedLibraries.Add(path, result);

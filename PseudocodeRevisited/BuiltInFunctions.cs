@@ -40,48 +40,48 @@ namespace PseudocodeRevisited
             AddFunction(".__index", BIF.Index);
         }
 
-        private Library CreateBuiltInsLibrary()
+        private static Library CreateBuiltInsLibrary()
         {
             Library lib = new Library();
-            lib.Add("hashtables.hashtable", "hashtable", BIF.MakeObject<Hashtable>);
-            lib.Add("hashtables.hasKey", ".hasKey", BIF.HasKey);
-            lib.Add("hashtables.getKey", ".getKey", BIF.GetKey);
-            lib.Add("hashtables.setKey", ".setKey", BIF.SetKey);
-            lib.Add("inputOutput.input", "input", BIF.Input);
-            lib.Add("inputOutput.write", "write", BIF.Write);
-            lib.Add("inputOutput.error", "error", BIF.Error);
+            lib.AddFunction("hashtables.hashtable", "hashtable", BIF.MakeObject<Hashtable>);
+            lib.AddFunction("hashtables.hasKey", ".hasKey", BIF.HasKey);
+            lib.AddFunction("hashtables.getKey", ".getKey", BIF.GetKey);
+            lib.AddFunction("hashtables.setKey", ".setKey", BIF.SetKey);
+            lib.AddFunction("inputOutput.input", "input", BIF.Input);
+            lib.AddFunction("inputOutput.write", "write", BIF.Write);
+            lib.AddFunction("inputOutput.error", "error", BIF.Error);
             #region Math Functions
-            lib.Add("math.abs", "abs", BIF.DblFunction("abs", Math.Abs));
-            lib.Add("math.acos", "acos", BIF.DblFunction("acos", Math.Acos));
-            lib.Add("math.asin", "asin", BIF.DblFunction("asin", Math.Asin));
-            lib.Add("math.atan", "atan", BIF.Atan); // Math.Atan() and Math.Atan2()
-            lib.Add("math.atan2", "atan2", BIF.DblFunction("atan2", Math.Atan2));
-            lib.Add("math.ceil", "ceil", BIF.DblFunction("ceil", Math.Ceiling));
-            lib.Add("math.cos", "cos", BIF.DblFunction("cos", Math.Cos));
-            lib.Add("math.cosh", "cosh", BIF.DblFunction("cosh", Math.Cosh));
-            lib.Add("math.exp", "exp", BIF.DblFunction("exp", Math.Exp));
-            lib.Add("math.floor", "floor", BIF.DblFunction("floor", Math.Floor));
-            lib.Add("math.ln", "ln", BIF.DblFunction("ln", (Func<double, double>)Math.Log));
-            lib.Add("math.log", "log", BIF.DblFunction("log", (Func<double, double, double>)Math.Log));
-            lib.Add("math.log10", "log10", BIF.DblFunction("log10", Math.Log10));
-            lib.Add("math.max", "max", BIF.Max); // Math.Max()
-            lib.Add("math.min", "min", BIF.Min); // Math.Min()
-            lib.Add("math.pow", "pow", BIF.DblFunction("pow", Math.Pow));
-            lib.Add("math.round", "round", BIF.DblFunction("round", Math.Round));
-            lib.Add("math.sign", "sign", BIF.DblFunction("sign", Math.Sign));
-            lib.Add("math.sin", "sin", BIF.DblFunction("sin", Math.Sin));
-            lib.Add("math.sinh", "sinh", BIF.DblFunction("sinh", Math.Sinh));
-            lib.Add("math.sqrt", "sqrt", BIF.DblFunction("sqrt", Math.Sqrt));
-            lib.Add("math.tan", "tan", BIF.DblFunction("tan", Math.Tan));
-            lib.Add("math.tanh", "tanh", BIF.DblFunction("tanh", Math.Tanh));
-            lib.Add("math.truncate", "truncate", BIF.DblFunction("truncate", Math.Truncate));
+            lib.AddFunction("math.abs", "abs", BIF.DblFunction("abs", Math.Abs));
+            lib.AddFunction("math.acos", "acos", BIF.DblFunction("acos", Math.Acos));
+            lib.AddFunction("math.asin", "asin", BIF.DblFunction("asin", Math.Asin));
+            lib.AddFunction("math.atan", "atan", BIF.Atan); // Math.Atan() and Math.Atan2()
+            lib.AddFunction("math.atan2", "atan2", BIF.DblFunction("atan2", Math.Atan2));
+            lib.AddFunction("math.ceil", "ceil", BIF.DblFunction("ceil", Math.Ceiling));
+            lib.AddFunction("math.cos", "cos", BIF.DblFunction("cos", Math.Cos));
+            lib.AddFunction("math.cosh", "cosh", BIF.DblFunction("cosh", Math.Cosh));
+            lib.AddFunction("math.exp", "exp", BIF.DblFunction("exp", Math.Exp));
+            lib.AddFunction("math.floor", "floor", BIF.DblFunction("floor", Math.Floor));
+            lib.AddFunction("math.ln", "ln", BIF.DblFunction("ln", (Func<double, double>)Math.Log));
+            lib.AddFunction("math.log", "log", BIF.DblFunction("log", (Func<double, double, double>)Math.Log));
+            lib.AddFunction("math.log10", "log10", BIF.DblFunction("log10", Math.Log10));
+            lib.AddFunction("math.max", "max", BIF.Max); // Math.Max()
+            lib.AddFunction("math.min", "min", BIF.Min); // Math.Min()
+            lib.AddFunction("math.pow", "pow", BIF.DblFunction("pow", Math.Pow));
+            lib.AddFunction("math.round", "round", BIF.DblFunction("round", Math.Round));
+            lib.AddFunction("math.sign", "sign", BIF.DblFunction("sign", Math.Sign));
+            lib.AddFunction("math.sin", "sin", BIF.DblFunction("sin", Math.Sin));
+            lib.AddFunction("math.sinh", "sinh", BIF.DblFunction("sinh", Math.Sinh));
+            lib.AddFunction("math.sqrt", "sqrt", BIF.DblFunction("sqrt", Math.Sqrt));
+            lib.AddFunction("math.tan", "tan", BIF.DblFunction("tan", Math.Tan));
+            lib.AddFunction("math.tanh", "tanh", BIF.DblFunction("tanh", Math.Tanh));
+            lib.AddFunction("math.truncate", "truncate", BIF.DblFunction("truncate", Math.Truncate));
             #endregion
             #region Functions on Functions
-            lib.Add("functionObjects.invoke", ".invoke", BIF.InvokeFunction);
-            lib.Add("functionObjects.invokeUnpack", ".invokeUnpack", BIF.InvokeUnpack);
-            lib.Add("functionObjects.bind", ".bind", BIF.Bind);
+            lib.AddFunction("functionObjects.invoke", ".invoke", BIF.InvokeFunction);
+            lib.AddFunction("functionObjects.invokeUnpack", ".invokeUnpack", BIF.InvokeUnpack);
+            lib.AddFunction("functionObjects.bind", ".bind", BIF.Bind);
             #endregion
-            lib.Add("concat", "concat", BIF.Concat);
+            lib.AddFunction("concat", "concat", BIF.Concat);
             return lib;
         }
     }
