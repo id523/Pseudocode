@@ -10,7 +10,7 @@ namespace PseudocodeRevisited.ControlStructures
     /// <summary>
     /// Represents a loop of the form "loop VAR from LOWER to UPPER".
     /// </summary>
-    public class LoopFromTo : ControlStructure
+    public sealed class LoopFromTo : ControlStructure
     {
         /// <summary>
         /// The <see cref="StartLoop"/> that initializes the loop.

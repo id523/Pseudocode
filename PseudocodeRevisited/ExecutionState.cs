@@ -11,7 +11,7 @@ namespace PseudocodeRevisited
     /// <summary>
     /// Holds all of the data required to run a pseudocode program.
     /// </summary>
-    public partial class ExecutionState
+    public sealed partial class ExecutionState
     {
         /// <summary>
         /// Creates a new ExecutionState.

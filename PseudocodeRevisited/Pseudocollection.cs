@@ -11,7 +11,7 @@ namespace PseudocodeRevisited
     /// Represents an IB "Collection" data structure.
     /// If it is possible to have a least favorite data type, this is mine.
     /// </summary>
-    public class Pseudocollection : IEnumerable<object>
+    public sealed class Pseudocollection : IEnumerable<object>
     {
         /// <summary>
         /// A List that stores the items in the <see cref="Pseudocollection"/>.

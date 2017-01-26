@@ -9,7 +9,7 @@ namespace PseudocodeRevisited
     /// <summary>
     /// Stores local variables and the Statements to go to with 'break' and 'continue'.
     /// </summary>
-    public class Scope
+    public sealed class Scope
     {
         /// <summary>
         /// The <see cref="Scope"/> that contains this one.

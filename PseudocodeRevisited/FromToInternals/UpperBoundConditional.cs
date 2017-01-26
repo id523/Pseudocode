@@ -11,7 +11,7 @@ namespace PseudocodeRevisited.FromToInternals
     /// A conditional branch statement that chooses an execution path based on whether the loop variable
     /// is greater than the upper bound. This is used in a from-to loop.
     /// </summary>
-    public sealed class UpperBoundConditional : Statement
+    internal sealed class UpperBoundConditional : Statement
     {
         /// <summary>
         /// The statement which is jumped to if the condition is true.

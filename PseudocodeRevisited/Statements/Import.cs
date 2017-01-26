@@ -8,7 +8,7 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// Imports a <see cref="PseudocodeRevisited.Library"/>.
     /// </summary>
-    public class Import : Statement
+    public sealed class Import : Statement
     {
         public string LibraryName { get; private set; }
         public string ID { get; private set; }

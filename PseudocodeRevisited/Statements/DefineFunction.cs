@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// A statement that defines a function.
     /// </summary>
-    public class DefineFunction : Statement
+    public sealed class DefineFunction : Statement
     {
         /// <summary>
         /// The name of the function.

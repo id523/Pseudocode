@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// Exits from a function, returning the result of an expression.
     /// </summary>
-    public class Return : Statement
+    public sealed class Return : Statement
     {
         public Expression RetVal { get; private set; }
         public Return(int lineNumber, Expression retval) : base(lineNumber)
@@ -25,7 +25,7 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// Exits from a function, returning null.
     /// </summary>
-    public class ReturnNothing : Statement
+    public sealed class ReturnNothing : Statement
     {
         public ReturnNothing(int lineNumber) : base(lineNumber)
         {

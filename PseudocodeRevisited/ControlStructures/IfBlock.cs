@@ -10,7 +10,7 @@ namespace PseudocodeRevisited.ControlStructures
     /// <summary>
     /// Represents an if-block, which starts "if [condition]" and ends "end if".
     /// </summary>
-    public class IfBlock : ControlStructure
+    public sealed class IfBlock : ControlStructure
     {
         /// <summary>
         /// The conditional that represents the last "else if [condition]" added.

@@ -6,7 +6,7 @@ namespace PseudocodeRevisited.Expressions
     /// <summary>
     /// A <see cref="IFullValue"/> that accesses the item with a specified key in an <see cref="IDictionary"/>.
     /// </summary>
-    public class HashtableIndexVariable : IFullValue
+    public sealed class HashtableIndexVariable : IFullValue
     {
         public IDictionary TableAccessed { get; private set; }
         public object Key { get; private set; }

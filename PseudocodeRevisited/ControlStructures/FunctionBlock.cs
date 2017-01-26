@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.ControlStructures
     /// <summary>
     /// Represents a function definition, and contains the body of a function.
     /// </summary>
-    public class FunctionBlock : ControlStructure
+    public sealed class FunctionBlock : ControlStructure
     {
         /// <summary>
         /// The string "function".

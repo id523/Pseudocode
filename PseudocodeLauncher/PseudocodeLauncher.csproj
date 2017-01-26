@@ -73,10 +73,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExternalLibraryTest\ExternalLibraryTest.csproj">
-      <Project>{8d657c3f-1deb-43a2-9068-0fde0a534885}</Project>
-      <Name>ExternalLibraryTest</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PseudocodeRevisited\PseudocodeRevisited.csproj">
       <Project>{41f768c2-72f5-4fad-8a36-26d5ab640d29}</Project>
       <Name>PseudocodeRevisited</Name>

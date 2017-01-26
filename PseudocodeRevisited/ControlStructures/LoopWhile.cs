@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.ControlStructures
     /// <summary>
     /// Represents a loop of the form "loop while [condition]"
     /// </summary>
-    public class LoopWhile : ControlStructure
+    public sealed class LoopWhile : ControlStructure
     {
         /// <summary>
         /// The last statement added to the loop body.

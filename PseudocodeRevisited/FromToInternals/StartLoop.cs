@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.FromToInternals
     /// <summary>
     /// Initializes a from-to loop.
     /// </summary>
-    public class StartLoop : Statement
+    internal sealed class StartLoop : Statement
     {
         /// <summary>
         /// The identifier for the loop variable.

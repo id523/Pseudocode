@@ -10,7 +10,7 @@ namespace PseudocodeRevisited
     /// <summary>
     /// A <see cref="ControlStructure"/> to which other <see cref="ControlStructure"/>s can be added.
     /// </summary>
-    public class ProgramBuilder : ControlStructure
+    public sealed class ProgramBuilder : ControlStructure
     {
         /// <summary>
         /// Stores the nested, unfinished <see cref="ControlStructure"/>s.

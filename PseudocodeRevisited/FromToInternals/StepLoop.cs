@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.FromToInternals
     /// <summary>
     /// A <see cref="Statement"/> that represents incrementing the loop variable of a from-to loop.
     /// </summary>
-    public class StepLoop : Statement
+    internal sealed class StepLoop : Statement
     {
         /// <summary>
         /// The identifier for the loop variable.

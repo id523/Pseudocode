@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// A Statement that enters a new local <see cref="Scope"/>.
     /// </summary>
-    public class PushContext : Statement
+    internal sealed class PushContext : Statement
     {
         public Statement BreakLocation { get; set; }
         public Statement ContinueLocation { get; set; }
@@ -30,7 +30,7 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// A Statement that exits out of the current <see cref="Scope"/>.
     /// </summary>
-    public class PopContext : Statement
+    internal sealed class PopContext : Statement
     {
         public PopContext(int lineNumber) : base(lineNumber) { }
         protected override void Run(ExecutionState s)

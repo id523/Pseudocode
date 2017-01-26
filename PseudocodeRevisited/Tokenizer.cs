@@ -10,7 +10,7 @@ namespace PseudocodeRevisited
     /// </summary>
     /// <typeparam name="TokenType">The type used to classify tokens.</typeparam>
     /// <typeparam name="TExtra">The type that contains extra data about the token.</typeparam>
-    public class Tokenizer<TokenType, TExtra> where TokenType : struct where TExtra : class
+    internal sealed class Tokenizer<TokenType, TExtra> where TokenType : struct where TExtra : class
     {
         /// <summary>
         /// Stores the TokenTypes and which Regex will match them.

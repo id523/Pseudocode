@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.ControlStructures
     /// <summary>
     /// Represents a loop of the form "loop until [condition]"
     /// </summary>
-    public class LoopUntil : ControlStructure
+    public sealed class LoopUntil : ControlStructure
     {
         /// <summary>
         /// The last statement added to the loop body.

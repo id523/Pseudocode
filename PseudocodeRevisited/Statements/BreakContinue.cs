@@ -9,7 +9,7 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// Exits the enclosing loop, if that is possible.
     /// </summary>
-    public class Break : Statement
+    public sealed class Break : Statement
     {
         public Break(int lineNumber) : base(lineNumber) { }
         protected override Statement RunGetNextInternal(ExecutionState s)
@@ -20,7 +20,7 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// Starts the next iteration the enclosing loop, if that is possible.
     /// </summary>
-    public class Continue : Statement
+    public sealed class Continue : Statement
     {
         public Continue(int lineNumber) : base(lineNumber) { }
         protected override Statement RunGetNextInternal(ExecutionState s)
