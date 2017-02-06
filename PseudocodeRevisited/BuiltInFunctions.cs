@@ -11,7 +11,7 @@ namespace PseudocodeRevisited
     public partial class ExecutionState
     {
         /// <summary>
-        /// Adds built-in functions.
+        /// Adds basic built-in functions, required for running all Pseudocode programs.
         /// </summary>
         private void InitCoreBuiltIns()
         {
@@ -39,17 +39,42 @@ namespace PseudocodeRevisited
             #endregion
             AddFunction(".__index", BIF.Index);
         }
-
+        /// <summary>
+        /// Creates the Library that contains optional functions.
+        /// These functions are imported using "import [blah] from builtins"
+        /// </summary>
         private static Library CreateBuiltInsLibrary()
         {
             Library lib = new Library();
+            #region Hashtables
             lib.AddFunction("hashtables.hashtable", "hashtable", BIF.MakeObject<Hashtable>);
             lib.AddFunction("hashtables.hasKey", ".hasKey", BIF.HasKey);
             lib.AddFunction("hashtables.getKey", ".getKey", BIF.GetKey);
             lib.AddFunction("hashtables.setKey", ".setKey", BIF.SetKey);
-            lib.AddFunction("inputOutput.input", "input", BIF.Input);
-            lib.AddFunction("inputOutput.write", "write", BIF.Write);
-            lib.AddFunction("inputOutput.error", "error", BIF.Error);
+            #endregion
+            #region Input/Output
+            lib.AddFunction("IO.basic.input", "input", BIF.Input);
+            lib.AddFunction("IO.basic.write", "write", BIF.Write);
+            lib.AddFunction("IO.basic.error", "error", BIF.Error);
+            lib.AddFunction("IO.colors.getFGColor", "getFGColor", BIF.GetFGColor);
+            lib.AddFunction("IO.colors.getBGColor", "getBGColor", BIF.GetBGColor);
+            lib.AddFunction("IO.colors.setFGColor", "setFGColor", BIF.SetFGColor);
+            lib.AddFunction("IO.colors.setBGColor", "setBGColor", BIF.SetBGColor);
+            lib.AddFunction("IO.cursor.getCursorX", "getCursorX", BIF.GetCursorX);
+            lib.AddFunction("IO.cursor.getCursorY", "getCursorY", BIF.GetCursorY);
+            lib.AddFunction("IO.cursor.setCursorX", "setCursorX", BIF.SetCursorX);
+            lib.AddFunction("IO.cursor.setCursorY", "setCursorY", BIF.SetCursorY);
+            #endregion
+            #region File Access
+            lib.AddFunction("IO.files.open", "fileOpen", null);
+            lib.AddFunction("IO.files.close", "fileClose", null);
+            lib.AddFunction("IO.files.writeText", "fileWriteText", null);
+            lib.AddFunction("IO.files.writeBytes", "fileWriteBytes", null);
+            lib.AddFunction("IO.files.writeLine", "fileWriteLine", null);
+            lib.AddFunction("IO.files.readText", "fileReadText", null);
+            lib.AddFunction("IO.files.readBytes", "fileReadBytes", null);
+            lib.AddFunction("IO.files.readLine", "fileReadLine", null);
+            #endregion
             #region Math Functions
             lib.AddFunction("math.abs", "abs", BIF.DblFunction("abs", Math.Abs));
             lib.AddFunction("math.acos", "acos", BIF.DblFunction("acos", Math.Acos));
@@ -59,6 +84,7 @@ namespace PseudocodeRevisited
             lib.AddFunction("math.ceil", "ceil", BIF.DblFunction("ceil", Math.Ceiling));
             lib.AddFunction("math.cos", "cos", BIF.DblFunction("cos", Math.Cos));
             lib.AddFunction("math.cosh", "cosh", BIF.DblFunction("cosh", Math.Cosh));
+            lib.Add("math.e", "e", Math.E);
             lib.AddFunction("math.exp", "exp", BIF.DblFunction("exp", Math.Exp));
             lib.AddFunction("math.floor", "floor", BIF.DblFunction("floor", Math.Floor));
             lib.AddFunction("math.ln", "ln", BIF.DblFunction("ln", (Func<double, double>)Math.Log));
@@ -66,6 +92,7 @@ namespace PseudocodeRevisited
             lib.AddFunction("math.log10", "log10", BIF.DblFunction("log10", Math.Log10));
             lib.AddFunction("math.max", "max", BIF.Max); // Math.Max()
             lib.AddFunction("math.min", "min", BIF.Min); // Math.Min()
+            lib.Add("math.pi", "pi", Math.PI);
             lib.AddFunction("math.pow", "pow", BIF.DblFunction("pow", Math.Pow));
             lib.AddFunction("math.round", "round", BIF.DblFunction("round", Math.Round));
             lib.AddFunction("math.sign", "sign", BIF.DblFunction("sign", Math.Sign));
@@ -507,5 +534,103 @@ namespace PseudocodeRevisited
                 return func.Invoke(s2, modArgs);
             });
         }
+        #region Console Commands
+        /// <summary>
+        /// Gets the console's foreground color.
+        /// </summary>
+        public static object GetFGColor(ExecutionState s, object[] args)
+        {
+            return (int)Console.ForegroundColor;
+        }
+        /// <summary>
+        /// Gets the console's background color.
+        /// </summary>
+        public static object GetBGColor(ExecutionState s, object[] args)
+        {
+            return (int)Console.BackgroundColor;
+        }
+        /// <summary>
+        /// Sets the console's foreground color.
+        /// </summary>
+        public static object SetFGColor(ExecutionState s, object[] args)
+        {
+            if (args.Length < 1)
+                throw new RuntimeException("Insufficient parameters for setFGColor()");
+            try
+            {
+                Console.ForegroundColor = (ConsoleColor)(Convert.ToInt64(args[0]) & 15L);
+            }
+            catch (Exception)
+            {
+                throw new RuntimeException((args[0]?.ToString() ?? "null") + " is not a valid console color");
+            }
+            return null;
+        }
+        /// <summary>
+        /// Sets the console's background color.
+        /// </summary>
+        public static object SetBGColor(ExecutionState s, object[] args)
+        {
+            if (args.Length < 1)
+                throw new RuntimeException("Insufficient parameters for setBGColor()");
+            try
+            {
+                Console.BackgroundColor = (ConsoleColor)(Convert.ToInt64(args[0]) & 15L);
+            }
+            catch (Exception)
+            {
+                throw new RuntimeException((args[0]?.ToString() ?? "null") + " is not a valid console color");
+            }
+            return null;
+        }
+        /// <summary>
+        /// Gets the X-coordinate of the cursor in the console.
+        /// </summary>
+        public static object GetCursorX(ExecutionState s, object[] args)
+        {
+            return Console.CursorLeft;
+        }
+        /// <summary>
+        /// Gets the Y-coordinate of the cursor in the console.
+        /// </summary>
+        public static object GetCursorY(ExecutionState s, object[] args)
+        {
+            return Console.CursorTop;
+        }
+        /// <summary>
+        /// Sets the X-coordinate of the cursor in the console.
+        /// </summary>
+        public static object SetCursorX(ExecutionState s, object[] args)
+        {
+            if (args.Length < 1)
+                throw new RuntimeException("Insufficient parameters for setCursorX()");
+            try
+            {
+                Console.CursorLeft = Convert.ToInt32(args[0]);
+            }
+            catch (Exception)
+            {
+                throw new RuntimeException((args[0]?.ToString() ?? "null") + " is not a valid coordinate");
+            }
+            return null;
+        }
+        /// <summary>
+        /// Sets the Y-coordinate of the cursor in the console.
+        /// </summary>
+        public static object SetCursorY(ExecutionState s, object[] args)
+        {
+            if (args.Length < 1)
+                throw new RuntimeException("Insufficient parameters for setCursorY()");
+            try
+            {
+                Console.CursorTop = Convert.ToInt32(args[0]);
+            }
+            catch (Exception)
+            {
+                throw new RuntimeException((args[0]?.ToString() ?? "null") + " is not a valid coordinate");
+            }
+            return null;
+        }
+        #endregion
     }
 }
