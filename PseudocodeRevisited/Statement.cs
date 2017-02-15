@@ -4,19 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited
-{
+namespace PseudocodeRevisited {
     /// <summary>
     /// Represents an action which can be performed by a pseudocode program.
     /// </summary>
-    public class Statement
-    {
+    public class Statement {
         /// <summary>
         /// The line number that this Statement corresponds to.
         /// </summary>
         public int LineNumber { get; private set; }
-        public Statement(int lineNumber)
-        {
+        public Statement(int lineNumber) {
             LineNumber = lineNumber;
         }
         public Statement NormalNext { get; set; }
@@ -28,19 +25,14 @@ namespace PseudocodeRevisited
         /// Performs this statement's action and returns the next statement to execute (for conditional
         /// branching or other special operations).
         /// </summary>
-        protected virtual Statement RunGetNextInternal(ExecutionState s)
-        {
+        protected virtual Statement RunGetNextInternal(ExecutionState s) {
             Run(s);
             return NormalNext;
         }
-        public Statement RunGetNext(ExecutionState s)
-        {
-            try
-            {
+        public Statement RunGetNext(ExecutionState s) {
+            try {
                 return RunGetNextInternal(s);
-            }
-            catch (RuntimeException ex)
-            {
+            } catch (RuntimeException ex) {
                 throw new RuntimeException(LineNumber.ToString() + ": " + ex.Message);
             }
         }

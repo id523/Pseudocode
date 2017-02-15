@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited
-{
-    public abstract class ControlStructure
-    {
+namespace PseudocodeRevisited {
+    public abstract class ControlStructure {
         /// <summary>
         /// Add a block of contiguous statements, where the first statement is 'first'
         /// and the last statement is 'last'.
@@ -16,8 +14,7 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Add a single statement.
         /// </summary>
-        public void AddStatement(Statement s)
-        {
+        public void AddStatement(Statement s) {
             AddStatements(s, s);
         }
         /// <summary>
@@ -36,14 +33,10 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Calls FinishProtected() if it has not already been called.
         /// </summary>
-        public Statement Finish(int lineNumber)
-        {
-            if (Valid)
-            {
+        public Statement Finish(int lineNumber) {
+            if (Valid) {
                 return FinishProtected(lineNumber);
-            }
-            else
-            {
+            } else {
                 throw new CompileException("Control structure " + Name + " has already been finished");
             }
         }

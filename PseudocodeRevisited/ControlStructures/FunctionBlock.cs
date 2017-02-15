@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited.ControlStructures
-{
+namespace PseudocodeRevisited.ControlStructures {
     /// <summary>
     /// Represents a function definition, and contains the body of a function.
     /// </summary>
-    public sealed class FunctionBlock : ControlStructure
-    {
+    public sealed class FunctionBlock : ControlStructure {
         /// <summary>
         /// The string "function".
         /// </summary>
@@ -26,8 +24,7 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Creates a new, empty function definition with the specified name and comma-separated parameter list.
         /// </summary>
-        public FunctionBlock(int lineNumber, string funcname, string args)
-        {
+        public FunctionBlock(int lineNumber, string funcname, string args) {
             def = new Statements.DefineFunction(lineNumber, funcname, args);
             FirstStatement = def;
             LastStatement = new Statement(lineNumber);
@@ -36,14 +33,12 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Adds consecutive statements to the body of the function.
         /// </summary>
-        public override void AddStatements(Statement first, Statement last)
-        {
+        public override void AddStatements(Statement first, Statement last) {
             LastStatement.NormalNext = first;
             LastStatement = last;
         }
 
-        protected override Statement FinishProtected(int lineNumber)
-        {
+        protected override Statement FinishProtected(int lineNumber) {
             return def;
         }
     }

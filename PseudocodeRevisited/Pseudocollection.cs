@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited
-{
+namespace PseudocodeRevisited {
     /// <summary>
     /// Represents an IB "Collection" data structure.
     /// If it is possible to have a least favorite data type, this is mine.
     /// </summary>
-    public sealed class Pseudocollection : IEnumerable<object>
-    {
+    public sealed class Pseudocollection : IEnumerable<object> {
         /// <summary>
         /// A List that stores the items in the <see cref="Pseudocollection"/>.
         /// </summary>
@@ -24,29 +22,25 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Creates a new, empty <see cref="Pseudocollection"/>.
         /// </summary>
-        public Pseudocollection()
-        {
+        public Pseudocollection() {
             backing = new List<object>();
         }
         /// <summary>
         /// Adds an item to the end.
         /// </summary>
-        public void AddItem(object obj)
-        {
+        public void AddItem(object obj) {
             backing.Add(obj);
         }
         /// <summary>
         /// Checks whether or not there are more items to retrieve with GetNext().
         /// </summary>
-        public bool HasNext()
-        {
+        public bool HasNext() {
             return ptr < backing.Count;
         }
         /// <summary>
         /// Gets the next item.
         /// </summary>
-        public object GetNext()
-        {
+        public object GetNext() {
             if (HasNext())
                 return backing[ptr++];
             else
@@ -56,26 +50,22 @@ namespace PseudocodeRevisited
         /// Resets the <see cref="Pseudocollection"/> so that the next call to <see cref="GetNext"/> will
         /// return the first item.
         /// </summary>
-        public void ResetNext()
-        {
+        public void ResetNext() {
             ptr = 0;
         }
         /// <summary>
         /// Checks whether there are any items. This is True after creation and
         /// False after the first call to <see cref="AddItem(object)"/>;
         /// </summary>
-        public bool IsEmpty()
-        {
+        public bool IsEmpty() {
             return backing.Count == 0;
         }
 
-        public IEnumerator<object> GetEnumerator()
-        {
+        public IEnumerator<object> GetEnumerator() {
             return ((IEnumerable<object>)backing).GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
+        IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
     }

@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited.ControlStructures
-{
+namespace PseudocodeRevisited.ControlStructures {
     /// <summary>
     /// Represents a loop of the form "loop while [condition]"
     /// </summary>
-    public sealed class LoopWhile : ControlStructure
-    {
+    public sealed class LoopWhile : ControlStructure {
         /// <summary>
         /// The last statement added to the loop body.
         /// </summary>
@@ -23,8 +21,7 @@ namespace PseudocodeRevisited.ControlStructures
         /// The conditional statement of the loop.
         /// </summary>
         private Statements.Conditional Conditional;
-        public LoopWhile(Expression cond)
-        {
+        public LoopWhile(Expression cond) {
             PushContext = new Statements.PushContext(cond.LineNumber);
             FirstStatement = PushContext;
             Conditional = new Statements.Conditional(cond);
@@ -35,16 +32,14 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Adds consecutive statements to the loop.
         /// </summary>
-        public override void AddStatements(Statement first, Statement last)
-        {
+        public override void AddStatements(Statement first, Statement last) {
             LastStatement.NormalNext = first;
             LastStatement = last;
         }
         /// <summary>
         /// Finalizes and closes the loop.
         /// </summary>
-        protected override Statement FinishProtected(int lineNumber)
-        {
+        protected override Statement FinishProtected(int lineNumber) {
             LastStatement.NormalNext = Conditional;
             Statements.PopContext final = new Statements.PopContext(lineNumber);
             Conditional.FalseBranch.NormalNext = final;

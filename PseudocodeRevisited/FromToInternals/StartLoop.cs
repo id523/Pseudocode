@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited.FromToInternals
-{
+namespace PseudocodeRevisited.FromToInternals {
     /// <summary>
     /// Initializes a from-to loop.
     /// </summary>
-    internal sealed class StartLoop : Statement
-    {
+    internal sealed class StartLoop : Statement {
         /// <summary>
         /// The identifier for the loop variable.
         /// </summary>
@@ -31,14 +29,12 @@ namespace PseudocodeRevisited.FromToInternals
         /// The statement to 'continue' to.
         /// </summary>
         public Statement ContinueLocation { get; set; }
-        public StartLoop(string loopvar, Expression lower, Expression upper) : base(lower.LineNumber)
-        {
+        public StartLoop(string loopvar, Expression lower, Expression upper) : base(lower.LineNumber) {
             LoopVar = loopvar;
             LowerBound = lower;
             UpperBound = upper;
         }
-        protected override void Run(ExecutionState s)
-        {
+        protected override void Run(ExecutionState s) {
             s.PushContext();
             if (BreakLocation != null)
                 s.Vars.BreakLocation = BreakLocation;

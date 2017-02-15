@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited.Statements
-{
+namespace PseudocodeRevisited.Statements {
     /// <summary>
     /// A statement that defines a function.
     /// </summary>
-    public sealed class DefineFunction : Statement
-    {
+    public sealed class DefineFunction : Statement {
         /// <summary>
         /// The name of the function.
         /// </summary>
@@ -27,8 +25,7 @@ namespace PseudocodeRevisited.Statements
         /// Creates a new <see cref="DefineFunction"/> with the specified function name,
         /// comma-separated argument name list, and ExecutionState to put the function in.
         /// </summary>
-        public DefineFunction(int lineNumber, string funcname, string args) : base(lineNumber)
-        {
+        public DefineFunction(int lineNumber, string funcname, string args) : base(lineNumber) {
             FunctionName = funcname;
             Tokenizer<int, string> argparse = new Tokenizer<int, string>();
             argparse.Selector = (m) => m.Groups["argname"].Value;
@@ -38,19 +35,16 @@ namespace PseudocodeRevisited.Statements
         /// <summary>
         /// Defines the function in the specified ExecutionState.
         /// </summary>
-        protected override void Run(ExecutionState s)
-        {
+        protected override void Run(ExecutionState s) {
             ExecutionState Capture = s;
-            s.AddFunction(FunctionName, delegate (ExecutionState s2, object[] args)
-            {
+            s.AddFunction(FunctionName, delegate (ExecutionState s2, object[] args) {
                 if (args.Length < argnames.Length)
                     throw new RuntimeException(
                         string.Format("Function {0}() expects at least {1} arguments",
                         FunctionName, argnames.Length));
                 ExecutionState funcstate = new ExecutionState(Capture);
                 funcstate.Vars.SetVariable("__args", args);
-                for (int i = 0; i < argnames.Length; i++)
-                {
+                for (int i = 0; i < argnames.Length; i++) {
                     funcstate.Vars.SetVariable(argnames[i], args[i]);
                 }
                 funcstate.NextStatement = FunctionStart;

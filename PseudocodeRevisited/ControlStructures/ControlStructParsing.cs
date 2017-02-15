@@ -8,18 +8,15 @@ using DefaultTokenizer =
     PseudocodeRevisited.Tokenizer<PseudocodeRevisited.ControlStructures.ControlStructParsing.LineType,
         System.Text.RegularExpressions.Match>;
 
-namespace PseudocodeRevisited.ControlStructures
-{
+namespace PseudocodeRevisited.ControlStructures {
     /// <summary>
     /// Contains methods and types used to parse <see cref="ControlStructure"/>s and <see cref="Statement"/>s.
     /// </summary>
-    internal static class ControlStructParsing
-    {
+    internal static class ControlStructParsing {
         /// <summary>
         /// A kind of line.
         /// </summary>
-        public enum LineType
-        {
+        public enum LineType {
             If, ElseIf, Else,
             LoopWhile, LoopUntil, LoopFromTo,
             BeginBlock, BeginFunction,
@@ -31,8 +28,7 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Creates a <see cref="DefaultTokenizer"/> to classify, and extract useful information from, lines of code.
         /// </summary>
-        public static DefaultTokenizer CreateTokenizer()
-        {
+        public static DefaultTokenizer CreateTokenizer() {
             DefaultTokenizer result = new DefaultTokenizer();
             result.Selector = (m) => m;
             result.AddTokenSpec(LineType.If, @"if (?<cond>.+) then$");
@@ -40,7 +36,7 @@ namespace PseudocodeRevisited.ControlStructures
             result.AddTokenSpec(LineType.Else, @"else$");
             result.AddTokenSpec(LineType.LoopWhile, @"loop while (?<cond>.+)$");
             result.AddTokenSpec(LineType.LoopUntil, @"loop until (?<cond>.+)$");
-            result.AddTokenSpec(LineType.LoopFromTo, 
+            result.AddTokenSpec(LineType.LoopFromTo,
                 @"loop (?<var>[_A-Za-z.][_A-Za-z0-9]*) from (?<lower>.+) to (?<upper>.+)$");
             result.AddTokenSpec(LineType.BeginBlock, @"block$");
             result.AddTokenSpec(LineType.BeginFunction, @"function (?<name>[_A-Za-z.][_A-Za-z0-9]*)\s*\((?<args>.*)\)$");
@@ -59,8 +55,7 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Splits a code block into lines.
         /// </summary>
-        internal static string[] SplitLines(string code)
-        {
+        internal static string[] SplitLines(string code) {
             return code.Split(LineTerminators, StringSplitOptions.None);
         }
     }

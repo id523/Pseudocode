@@ -4,22 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited.Statements
-{
+namespace PseudocodeRevisited.Statements {
     /// <summary>
     /// A Statement that enters a new local <see cref="Scope"/>.
     /// </summary>
-    internal sealed class PushContext : Statement
-    {
+    internal sealed class PushContext : Statement {
         public Statement BreakLocation { get; set; }
         public Statement ContinueLocation { get; set; }
-        public PushContext(int lineNumber) : base(lineNumber)
-        {
+        public PushContext(int lineNumber) : base(lineNumber) {
             BreakLocation = null;
             ContinueLocation = null;
         }
-        protected override void Run(ExecutionState s)
-        {
+        protected override void Run(ExecutionState s) {
             s.PushContext();
             if (BreakLocation != null)
                 s.Vars.BreakLocation = BreakLocation;
@@ -30,11 +26,9 @@ namespace PseudocodeRevisited.Statements
     /// <summary>
     /// A Statement that exits out of the current <see cref="Scope"/>.
     /// </summary>
-    internal sealed class PopContext : Statement
-    {
+    internal sealed class PopContext : Statement {
         public PopContext(int lineNumber) : base(lineNumber) { }
-        protected override void Run(ExecutionState s)
-        {
+        protected override void Run(ExecutionState s) {
             s.PopContext();
         }
     }

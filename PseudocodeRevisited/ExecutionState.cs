@@ -5,20 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using PseudocodeRevisited.Statements;
 
-namespace PseudocodeRevisited
-{
+namespace PseudocodeRevisited {
     public delegate object PseudocodeFunction(ExecutionState s, object[] args);
     /// <summary>
     /// Holds all of the data required to run a pseudocode program.
     /// </summary>
-    public sealed partial class ExecutionState
-    {
+    public sealed partial class ExecutionState {
         /// <summary>
         /// Creates a new ExecutionState.
         /// </summary>
         public ExecutionState() : this(null) { }
-        public ExecutionState(ExecutionState parent)
-        {
+        public ExecutionState(ExecutionState parent) {
             Vars = new Scope(parent?.Vars);
             LoadedLibraries = parent?.LoadedLibraries ?? new Dictionary<string, Library>();
             InitCoreBuiltIns();
@@ -37,15 +34,13 @@ namespace PseudocodeRevisited
         /// If no function is being run, this value is ignored.
         /// </summary>
         public object ReturnValue { get; set; }
-        public void AddFunction(string identifier, PseudocodeFunction action)
-        {
+        public void AddFunction(string identifier, PseudocodeFunction action) {
             Vars.SetVariable(identifier, action);
         }
         /// <summary>
         /// Calls the function with the specified name and arguments.
         /// </summary>
-        public object CallFunction(string identifier, object[] args)
-        {
+        public object CallFunction(string identifier, object[] args) {
             object funcObj = Vars.GetVariable(identifier);
             return CallFunction(funcObj, args, identifier + " is not a function");
         }
@@ -53,14 +48,10 @@ namespace PseudocodeRevisited
         /// Calls an anonymous function with the specified arguments and error message on failure.
         /// </summary>
         public object CallFunction(object funcObj, object[] args,
-            string errorMessage = "Unable to call function")
-        {
-            if (funcObj is PseudocodeFunction)
-            {
+            string errorMessage = "Unable to call function") {
+            if (funcObj is PseudocodeFunction) {
                 return ((PseudocodeFunction)funcObj).Invoke(this, args);
-            }
-            else
-            {
+            } else {
                 throw new RuntimeException(errorMessage);
             }
         }
@@ -69,10 +60,8 @@ namespace PseudocodeRevisited
         /// discarding any variables in control structures that were jumped out of.
         /// Returns the <see cref="Statement"/> to jump to.
         /// </summary>
-        public Statement Break()
-        {
-            while (Vars.BreakLocation == null)
-            {
+        public Statement Break() {
+            while (Vars.BreakLocation == null) {
                 if (Vars.Parent == null)
                     throw new RuntimeException("'break' is not permitted here");
                 Vars = Vars.Parent;
@@ -84,10 +73,8 @@ namespace PseudocodeRevisited
         /// discarding any variables in control structures that were jumped out of.
         /// Returns the <see cref="Statement"/> to jump to.
         /// </summary>
-        public Statement Continue()
-        {
-            while (Vars.ContinueLocation == null)
-            {
+        public Statement Continue() {
+            while (Vars.ContinueLocation == null) {
                 if (Vars.Parent == null)
                     throw new RuntimeException("'continue' is not permitted here");
                 Vars = Vars.Parent;
@@ -97,22 +84,19 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Signals the start of a new scope with its own local variables.
         /// </summary>
-        public void PushContext()
-        {
+        public void PushContext() {
             Vars = new Scope(Vars);
         }
         /// <summary>
         /// Exits the scope created by the matching <see cref="PushContext"/>, discarding any local variables.
         /// </summary>
-        public void PopContext()
-        {
+        public void PopContext() {
             Vars = Vars.Parent ?? Vars;
         }
         /// <summary>
         /// Runs a single statement, and returns False if there are no more statements.
         /// </summary>
-        public bool Step()
-        {
+        public bool Step() {
             if (NextStatement == null)
                 return false;
             NextStatement = NextStatement.RunGetNext(this);
@@ -121,8 +105,7 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Runs statements until there are no more left.
         /// </summary>
-        public void Run()
-        {
+        public void Run() {
             while (Step()) ;
         }
     }

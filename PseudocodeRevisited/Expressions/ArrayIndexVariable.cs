@@ -4,37 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited.Expressions
-{
+namespace PseudocodeRevisited.Expressions {
     /// <summary>
     /// A <see cref="IFullValue"/> that accesses an index into an array.
     /// </summary>
-    public sealed class ArrayIndexVariable : IFullValue
-    {
+    public sealed class ArrayIndexVariable : IFullValue {
         public object[] ArrayAccessed { get; private set; }
         public int Index { get; private set; }
-        public ArrayIndexVariable(object[] arr, object idx)
-        {
+        public ArrayIndexVariable(object[] arr, object idx) {
             ArrayAccessed = arr;
-            try
-            {
+            try {
                 Index = Convert.ToInt32(idx);
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 throw new RuntimeException("Indices into arrays must be whole numbers");
             }
-            if (Index < 0 || Index >= ArrayAccessed.Length)
-            {
+            if (Index < 0 || Index >= ArrayAccessed.Length) {
                 throw new RuntimeException("The index is outside the bounds of the array");
             }
         }
-        public void SetValue(ExecutionState s, object v)
-        {
+        public void SetValue(ExecutionState s, object v) {
             ArrayAccessed[Index] = v;
         }
-        public object GetValue(ExecutionState s)
-        {
+        public object GetValue(ExecutionState s) {
             return ArrayAccessed[Index];
         }
     }

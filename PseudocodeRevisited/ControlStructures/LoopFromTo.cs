@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using PseudocodeRevisited.FromToInternals;
 
-namespace PseudocodeRevisited.ControlStructures
-{
+namespace PseudocodeRevisited.ControlStructures {
     /// <summary>
     /// Represents a loop of the form "loop VAR from LOWER to UPPER".
     /// </summary>
-    public sealed class LoopFromTo : ControlStructure
-    {
+    public sealed class LoopFromTo : ControlStructure {
         /// <summary>
         /// The <see cref="StartLoop"/> that initializes the loop.
         /// </summary>
@@ -39,8 +37,7 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Creates a new from-to loop.
         /// </summary>
-        public LoopFromTo(string loopvar, Expression lower, Expression upper)
-        {
+        public LoopFromTo(string loopvar, Expression lower, Expression upper) {
             StartLoop = new StartLoop(loopvar, lower, upper);
             FirstStatement = StartLoop;
             Conditional = new UpperBoundConditional(upper.LineNumber, loopvar);
@@ -51,16 +48,14 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Adds statements to the loop body.
         /// </summary>
-        public override void AddStatements(Statement first, Statement last)
-        {
+        public override void AddStatements(Statement first, Statement last) {
             LastStatement.NormalNext = first;
             LastStatement = last;
         }
         /// <summary>
         /// Finalizes and closes the loop.
         /// </summary>
-        protected override Statement FinishProtected(int lineNumber)
-        {
+        protected override Statement FinishProtected(int lineNumber) {
             StepLoop step = new StepLoop(lineNumber, LoopVar);
             StartLoop.ContinueLocation = step;
             LastStatement.NormalNext = step;

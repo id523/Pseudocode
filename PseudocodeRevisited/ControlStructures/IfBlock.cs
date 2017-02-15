@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Conditional = PseudocodeRevisited.Statements.Conditional;
 
-namespace PseudocodeRevisited.ControlStructures
-{
+namespace PseudocodeRevisited.ControlStructures {
     /// <summary>
     /// Represents an if-block, which starts "if [condition]" and ends "end if".
     /// </summary>
-    public sealed class IfBlock : ControlStructure
-    {
+    public sealed class IfBlock : ControlStructure {
         /// <summary>
         /// The conditional that represents the last "else if [condition]" added.
         /// </summary>
@@ -28,8 +26,7 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Creates a new if-block with the specified condition.
         /// </summary>
-        public IfBlock(Expression cond)
-        {
+        public IfBlock(Expression cond) {
             LastStatements = new List<Statement>();
             FirstStatement = new Statements.PushContext(cond.LineNumber);
             LastConditional = new Conditional(cond);
@@ -39,8 +36,7 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Adds statements to the if-block.
         /// </summary>
-        public override void AddStatements(Statement first, Statement last)
-        {
+        public override void AddStatements(Statement first, Statement last) {
             int lastIndex = LastStatements.Count - 1;
             LastStatements[lastIndex].NormalNext = first;
             LastStatements[lastIndex] = last;
@@ -48,39 +44,31 @@ namespace PseudocodeRevisited.ControlStructures
         /// <summary>
         /// Adds a new condition to the if-block.
         /// </summary>
-        public void ElseIf(Expression cond)
-        {
-            if (!AddingElse)
-            {
+        public void ElseIf(Expression cond) {
+            if (!AddingElse) {
                 Conditional NextConditional = new Conditional(cond);
                 LastConditional.FalseBranch.NormalNext = NextConditional;
                 LastStatements.Add(NextConditional.TrueBranch);
                 LastConditional = NextConditional;
-            }
-            else
+            } else
                 throw new CompileException("'else if' is not permitted after 'else'");
         }
         /// <summary>
         /// Adds an else section to the if-block.
         /// </summary>
-        public void Else()
-        {
-            if (!AddingElse)
-            {
+        public void Else() {
+            if (!AddingElse) {
                 LastStatements.Add(LastConditional.FalseBranch);
                 AddingElse = true;
-            }
-            else
+            } else
                 throw new CompileException("'else' is not permitted after 'else'");
         }
         /// <summary>
         /// Finishes the if-block.
         /// </summary>
-        protected override Statement FinishProtected(int lineNumber)
-        {
+        protected override Statement FinishProtected(int lineNumber) {
             Statement final = new Statements.PopContext(lineNumber);
-            foreach (Statement penult in LastStatements)
-            {
+            foreach (Statement penult in LastStatements) {
                 penult.NormalNext = final;
             }
             // If there was no else clause, finish the last if statement.

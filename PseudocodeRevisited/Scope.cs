@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PseudocodeRevisited
-{
+namespace PseudocodeRevisited {
     /// <summary>
     /// Stores local variables and the Statements to go to with 'break' and 'continue'.
     /// </summary>
-    public sealed class Scope
-    {
+    public sealed class Scope {
         /// <summary>
         /// The <see cref="Scope"/> that contains this one.
         /// </summary>
@@ -22,8 +20,7 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Creates a new local <see cref="Scope"/> enclosed inside the specified one.
         /// </summary>
-        public Scope(Scope parent)
-        {
+        public Scope(Scope parent) {
             Parent = parent;
             Variables = new Dictionary<string, object>(32);
         }
@@ -47,19 +44,16 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Sets a variable in this scope or any enclosing scope.
         /// </summary>
-        public void SetVariable(string identifier, object value)
-        {
+        public void SetVariable(string identifier, object value) {
             Scope scope = Locate(identifier) ?? this;
             scope.Variables[identifier] = value;
         }
         /// <summary>
         /// Finds the scope which contains the variable of the specified name.
         /// </summary>
-        private Scope Locate(string identifier)
-        {
+        private Scope Locate(string identifier) {
             Scope curr = this;
-            while (curr != null && !curr.Variables.ContainsKey(identifier))
-            {
+            while (curr != null && !curr.Variables.ContainsKey(identifier)) {
                 curr = curr.Parent;
             }
             return curr;
@@ -67,11 +61,9 @@ namespace PseudocodeRevisited
         /// <summary>
         /// Gets a variable in this scope or any enclosing scope.
         /// </summary>
-        public object GetVariable(string identifier)
-        {
+        public object GetVariable(string identifier) {
             Scope scope = Locate(identifier);
-            if (scope == null)
-            {
+            if (scope == null) {
                 throw new RuntimeException(string.Format("Identifier {0} is not defined", identifier));
             }
             return scope.Variables[identifier];
