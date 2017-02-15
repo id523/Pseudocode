@@ -75,6 +75,7 @@
     <Compile Include="ControlStructures\LoopWhile.cs" />
     <Compile Include="Expressions\ExpressionParsing.cs" />
     <Compile Include="Expressions\HashtableIndexVariable.cs" />
+    <Compile Include="FileAccess\File.cs" />
     <Compile Include="FromToInternals\StartLoop.cs" />
     <Compile Include="FromToInternals\UpperBoundConditional.cs" />
     <Compile Include="FromToInternals\StepLoop.cs" />

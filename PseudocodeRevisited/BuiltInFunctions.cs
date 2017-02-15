@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BIF = PseudocodeRevisited.BuiltInFunctions;
+using FileMode = System.IO.FileMode;
 
 namespace PseudocodeRevisited
 {
@@ -74,6 +75,12 @@ namespace PseudocodeRevisited
             lib.AddFunction("IO.files.readText", "fileReadText", null);
             lib.AddFunction("IO.files.readBytes", "fileReadBytes", null);
             lib.AddFunction("IO.files.readLine", "fileReadLine", null);
+            lib.Add("IO.files.fileMode.append", "fileMode_append", FileMode.Append);
+            lib.Add("IO.files.fileMode.createOver", "fileMode_createOver", FileMode.Create);
+            lib.Add("IO.files.fileMode.createNew", "fileMode_createNew", FileMode.CreateNew);
+            lib.Add("IO.files.fileMode.read", "fileMode_read", FileMode.Open);
+            lib.Add("IO.files.fileMode.readCreate", "fileMode_readCreate", FileMode.OpenOrCreate);
+            lib.Add("IO.files.fileMode.overwrite", "fileMode_overwrite", FileMode.Truncate);
             #endregion
             #region Math Functions
             lib.AddFunction("math.abs", "abs", BIF.DblFunction("abs", Math.Abs));
